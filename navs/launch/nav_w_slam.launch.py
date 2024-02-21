@@ -11,13 +11,15 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     nav2_bringup_dir = get_package_share_directory('nav2_bringup')
-    python_commander_dir = get_package_share_directory('nav2_simple_commander')
-    pkgShare_dir = launch_ros.substitutions.FindPackageShare(package='simple_nav').find('simple_nav')
+    pkgShare_dir = get_package_share_directory('navs')
     nav_yaml_file = os.path.join(pkgShare_dir, 'config', 'nav2_params.yaml')
     bringup_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(nav2_bringup_dir, 'launch', 'bringup_launch.py')),
-        launch_arguments={'slam': 'True','use_sim_time': 'true', 'params_file': nav_yaml_file}.items())
+            os.path.join(nav2_bringup_dir, 'launch', 'slam_launch.py')),
+        launch_arguments={
+                          'use_sim_time': 'True',
+                          'params_file': nav_yaml_file
+                        }.items())
     
     ld = LaunchDescription()
     ld.add_action(bringup_cmd)
