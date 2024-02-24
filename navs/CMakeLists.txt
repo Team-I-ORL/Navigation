@@ -8,7 +8,34 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-# find_package([deps] REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(yaml-cpp REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
+
+install(DIRECTORY
+launch config maps
+DESTINATION share/${PROJECT_NAME}
+)
+
+set(TARGET_DEPENDS
+    rclcpp
+    yaml-cpp
+    tf2
+    tf2_geometry_msgs
+)
+
+
+include_directories(include)
+
+add_executable(set_amcl_init_pose src/set_amcl_init_pose.cpp)
+ament_target_dependencies(set_amcl_init_pose ${TARGET_DEPENDS})
+
+
+install(TARGETS
+  set_amcl_init_pose
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
