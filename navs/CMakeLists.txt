@@ -14,7 +14,7 @@ find_package(tf2 REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 
 install(DIRECTORY
-launch config maps
+launch config maps rviz2
 DESTINATION share/${PROJECT_NAME}
 )
 

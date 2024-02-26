@@ -40,13 +40,13 @@ def generate_launch_description():
     ld = LaunchDescription()
     ld.add_action(localizer)
     ld.add_action(use_sim_time)
-
+    print("Using Sim Time:", use_sim_time_choice)
     nav_yaml_file = os.path.join(pkgShare_dir, 'config', 'nav2_params_amcl.yaml')
     bringup_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(nav2_bringup_dir, 'launch', 'bringup_launch.py')),
         launch_arguments={
-                        'use_sim_time': use_sim_time_choice,
+                        'use_sim_time': "true",
                         'params_file': nav_yaml_file,
                         'map' : map_file
                         }.items(),
@@ -59,7 +59,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             os.path.join(nav2_bringup_dir, 'launch', 'navigation_launch.py')),
         launch_arguments={
-                        'use_sim_time': use_sim_time_choice,
+                        'use_sim_time': "true",
                         'params_file': nav_slam_yaml_file,
                         'map' : map_file,
                         # 'slam' : 'True'
