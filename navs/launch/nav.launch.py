@@ -17,8 +17,8 @@ def generate_launch_description():
     pkgShare_dir = get_package_share_directory('navs')
     # map_file = os.path.join(pkgShare_dir, 'maps', 'map.yaml')
     
-    pkg_tb3_sim = get_package_share_directory('tb3_sim')
-    map_file = os.path.join(pkg_tb3_sim, 'maps', 'map.yaml')
+    # pkg_tb3_sim = get_package_share_directory('tb3_sim')
+    map_file = os.path.join(pkgShare_dir, 'maps', 'map.yaml')
 
     localizer_choice = LaunchConfiguration('localizer')
     localizer = DeclareLaunchArgument(
@@ -86,8 +86,8 @@ def generate_launch_description():
       executable="set_amcl_init_pose",
       name="set_amcl_init_pose",
       parameters=[{
-          "x": -2.0,
-          "y": -0.5,
+          "x": 8.8,#16.59,
+          "y": 4.5,#8.465,
           "theta": 0.0,  
       }]
     )
