@@ -9,6 +9,9 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration, PythonExpression
+# [INFO] [1709129476.484761733] [rviz2]: Setting goal pose: Frame:map, Position(4.29789, -0.74416, 0), Orientation(0, 0, -0.699018, 0.715104) = Angle: -1.54805
+# [INFO] [1709129571.304819925] [rviz2]: Setting goal pose: Frame:map, Position(4.12592, 1.34027, 0), Orientation(0, 0, -0.997467, 0.0711357) = Angle: -2.9992
+# [INFO] [1709129665.008079153] [rviz2]: Setting goal pose: Frame:map, Position(-4.28872, -1.90128, 0), Orientation(0, 0, -0.999095, 0.0425278) = Angle: -3.05651
 
 
 def generate_launch_description():
