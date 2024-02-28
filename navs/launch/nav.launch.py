@@ -15,10 +15,10 @@ def generate_launch_description():
     nav2_bringup_dir = get_package_share_directory('nav2_bringup')
     slam_toolbox_dir = get_package_share_directory('slam_toolbox')
     pkgShare_dir = get_package_share_directory('navs')
-    # map_file = os.path.join(pkgShare_dir, 'maps', 'map.yaml')
     
     # pkg_tb3_sim = get_package_share_directory('tb3_sim')
-    map_file = os.path.join(pkgShare_dir, 'maps', 'map.yaml')
+    # map_file = os.path.join(pkg_tb3_sim, 'maps', 'map.yaml')
+    map_file = os.path.join(pkgShare_dir, 'maps', 'working_map.yaml')
 
     localizer_choice = LaunchConfiguration('localizer')
     localizer = DeclareLaunchArgument(
@@ -46,7 +46,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             os.path.join(nav2_bringup_dir, 'launch', 'bringup_launch.py')),
         launch_arguments={
-                        'use_sim_time': "true",
+                        'use_sim_time': use_sim_time_choice,
                         'params_file': nav_yaml_file,
                         'map' : map_file
                         }.items(),
@@ -59,7 +59,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource(
             os.path.join(nav2_bringup_dir, 'launch', 'navigation_launch.py')),
         launch_arguments={
-                        'use_sim_time': "true",
+                        'use_sim_time': use_sim_time_choice,
                         'params_file': nav_slam_yaml_file,
                         'map' : map_file,
                         # 'slam' : 'True'
@@ -86,11 +86,16 @@ def generate_launch_description():
       executable="set_amcl_init_pose",
       name="set_amcl_init_pose",
       parameters=[{
-          "x": 8.8,#16.59,
-          "y": 4.5,#8.465,
+          "x": 0.0,#16.59,
+          "y": 0.0,#8.465,
           "theta": 0.0,  
+          "use_sim_time": use_sim_time_choice
       }]
     )
-    ld.add_action(set_init_amcl_pose_cmd)
-        
+    ld.add_action(
+        TimerAction(
+            period=1.0, 
+            actions=[set_init_amcl_pose_cmd],
+        )
+    )        
     return ld
