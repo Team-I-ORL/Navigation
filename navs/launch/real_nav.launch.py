@@ -21,7 +21,7 @@ def generate_launch_description():
     
     # pkg_tb3_sim = get_package_share_directory('tb3_sim')
     # map_file = os.path.join(pkg_tb3_sim, 'maps', 'map.yaml')
-    map_file = os.path.join(pkgShare_dir, 'maps', 'nice_map.yaml')
+    map_file = os.path.join(pkgShare_dir, 'maps', 'map_0320.yaml')
 
     localizer_choice = LaunchConfiguration('localizer')
     localizer = DeclareLaunchArgument(
@@ -29,8 +29,8 @@ def generate_launch_description():
         default_value='"amcl"',
         description='Whether to use amcl or slam toolbox'
     )
-    # ros2 launch navs nav.launch.py localizer:="'slam'" launches slam toolbox as localizer
-    # ros2 launch navs nav.launch.py localizer:="'amcl'" launches amcl as localizer
+    # ros2 launch navs real_nav.launch.py localizer:="'slam'" launches slam toolbox as localizer
+    # ros2 launch navs real_nav.launch.py localizer:="'amcl'" launches amcl as localizer
 
 
     use_sim_time_choice = LaunchConfiguration('use_sim_time')
@@ -56,14 +56,15 @@ def generate_launch_description():
         condition=IfCondition(PythonExpression([localizer_choice, '==', '"amcl"']))
     )
     ld.add_action(bringup_cmd)
-    
-    nav_slam_yaml_file = os.path.join(pkgShare_dir, 'config', 'nav2_params_real.yaml')
+    ########################################################################################
+    # SLAM mode launching
+    nav_slam_yaml_file = os.path.join(pkgShare_dir, 'config', 'nav2_params_real_slam.yaml')
     bringup_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(nav2_bringup_dir, 'launch', 'navigation_launch.py')),
         launch_arguments={
                         'use_sim_time': use_sim_time_choice,
-                        'slam_params_file': nav_slam_yaml_file,
+                        'params_file': nav_slam_yaml_file,
                         'map' : map_file,
                         # 'slam' : 'True'
                         }.items(),
@@ -89,9 +90,9 @@ def generate_launch_description():
       executable="set_amcl_init_pose",
       name="set_amcl_init_pose",
       parameters=[{
-          "x": -4.7,#16.59,
-          "y": -27.897,#8.465,
-          "theta": 0.0,  
+          "x": 6.62,#-5.52,
+          "y": -3.2,#-27.515,
+          "theta": 3.04,  
           "use_sim_time": use_sim_time_choice
       }]
     )
