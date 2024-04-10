@@ -65,7 +65,7 @@ def generate_launch_description():
         launch_arguments={
                         'use_sim_time': use_sim_time_choice,
                         'params_file': nav_slam_yaml_file,
-                        'map' : map_file,
+                        # 'map' : map_file,
                         # 'slam' : 'True'
                         }.items(),
         condition=IfCondition(PythonExpression([localizer_choice, '==', '"slam"']))
@@ -98,7 +98,7 @@ def generate_launch_description():
     )
     ld.add_action(
         TimerAction(
-            period=1.0, 
+            period=10.0, 
             actions=[set_init_amcl_pose_cmd],
         )
     )        

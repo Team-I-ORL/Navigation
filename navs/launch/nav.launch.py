@@ -72,7 +72,7 @@ def generate_launch_description():
     
     slam_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-            os.path.join(slam_toolbox_dir, 'launch', 'localization_launch.py')
+            os.path.join(slam_toolbox_dir, 'launch', 'online_async_launch.py')
         ),
         launch_arguments={
             'use_sim_time': use_sim_time_choice,
@@ -97,7 +97,7 @@ def generate_launch_description():
     )
     ld.add_action(
         TimerAction(
-            period=1.0, 
+            period=3.0, 
             actions=[set_init_amcl_pose_cmd],
         )
     )        
