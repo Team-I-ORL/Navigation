@@ -12,6 +12,8 @@ find_package(rclcpp REQUIRED)
 find_package(yaml-cpp REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
+find_package(orbiter_bt REQUIRED)
+find_package(geometry_msgs REQUIRED)
 
 install(DIRECTORY
 launch config maps rviz2
@@ -23,17 +25,22 @@ set(TARGET_DEPENDS
     yaml-cpp
     tf2
     tf2_geometry_msgs
+    orbiter_bt
+    geometry_msgs
 )
 
 
 include_directories(include)
 
 add_executable(set_amcl_init_pose src/set_amcl_init_pose.cpp)
+add_executable(cmd_vel_interface src/cmd_vel_interface.cpp)
 ament_target_dependencies(set_amcl_init_pose ${TARGET_DEPENDS})
+ament_target_dependencies(cmd_vel_interface ${TARGET_DEPENDS})
 
 
 install(TARGETS
   set_amcl_init_pose
+  cmd_vel_interface
   DESTINATION lib/${PROJECT_NAME}
 )
 

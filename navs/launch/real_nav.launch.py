@@ -21,7 +21,7 @@ def generate_launch_description():
     
     # pkg_tb3_sim = get_package_share_directory('tb3_sim')
     # map_file = os.path.join(pkg_tb3_sim, 'maps', 'map.yaml')
-    map_file = os.path.join(pkgShare_dir, 'maps', 'map_0320.yaml')
+    map_file = os.path.join(pkgShare_dir, 'maps', 'fall_map.yaml')
 
     localizer_choice = LaunchConfiguration('localizer')
     localizer = DeclareLaunchArgument(
@@ -90,9 +90,9 @@ def generate_launch_description():
       executable="set_amcl_init_pose",
       name="set_amcl_init_pose",
       parameters=[{
-          "x": 6.62,#-5.52,
-          "y": -3.2,#-27.515,
-          "theta": 3.04,  
+          "x": -8.05,
+          "y": 10.43,
+          "theta": -1.098, 
           "use_sim_time": use_sim_time_choice
       }]
     )

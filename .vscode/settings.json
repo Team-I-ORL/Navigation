@@ -1,0 +1,15 @@
+{
+    "cmake.sourceDirectory": "/home/siddharth/fall_ws/src/Navigation/navs",
+    "files.associations": {
+        "chrono": "cpp",
+        "any": "cpp",
+        "array": "cpp",
+        "compare": "cpp",
+        "functional": "cpp",
+        "ratio": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "variant": "cpp"
+    }
+}
