@@ -90,9 +90,9 @@ def generate_launch_description():
       executable="set_amcl_init_pose",
       name="set_amcl_init_pose",
       parameters=[{
-          "x": -8.05,
-          "y": 10.43,
-          "theta": -1.098, 
+          "x": -8.1511,
+          "y": 8.7678,
+          "theta": 180, 
           "use_sim_time": use_sim_time_choice
       }]
     )
